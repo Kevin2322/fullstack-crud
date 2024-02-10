@@ -1,9 +1,9 @@
-<h1> get method</h1>
-<p>{{employees | json}}</p>
+<!-- <h1> get method</h1>
+<p>{{employees | json}}</p> -->
 
-<!-- <div>
-  <button class="btn btn-primary my-5" type="submit">Add Employee</button>
-</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Employee
+</button>
 <div class="container mt-2">
   <form>
     <table class="table">
@@ -18,26 +18,54 @@
       </thead>
       <tbody>
 
-         <tr >
-         @for(employee of employees; track employees.eid){
+        @for(employee of employees; track employees.eid){
+        <tr >
             <td>{{employee.eid}}</td>
             <td>{{employee.employeename}}</td>
             <td>{{employee.salary}}</td>
             <td>{{employee.designation}}</td>
-            <td>
-              <button class="btn btn-danger me-2" type="submit">Delete</button>
-              <button class="btn btn-warning" type="submit" >Edit</button>
+            <td class="d-flex">
+              <button class="btn btn-danger me-2" type="submit" (click)="OnDelete(employee.eid)">Delete</button>
+              <button class="btn btn-warning" type="submit" (click)="OnClickEdit(employee)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
             </td>
-          }@empty{
-            <td>No Employee Data Available!</td>
-          }
-        </tr>
+          </tr>
+        }
       </tbody>
     </table>
   </form>
-</div> -->
-<!--
-   <div class="container mt-5">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label  class="form-label">Name</label>
+          <input type="text" class="form-control"  aria-describedby="emailHelp" [(ngModel)]="employeename">
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Designation</label>
+          <input type="text" class="form-control"  aria-describedby="emailHelp"[(ngModel)]="designation" >
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Salary</label>
+          <input type="text" class="form-control"  aria-describedby="emailHelp" [(ngModel)]="salary">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)=" !isEdit ? OnSave() : OnEdit()" data-bs-dismiss="modal">{{!isEdit ? "Save" : "Update"}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+   <!-- <div class="container mt-5">
     <h3></h3>
   </div>
   <br>
